@@ -118,7 +118,7 @@ namespace scaffold.Controllers
     
             return View();
         }
-        [HttpPost]
+        [HttpGet]
         [Route("delete_listing")]
         public IActionResult DeleteListing(Delete model)
         {

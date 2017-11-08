@@ -27,10 +27,7 @@
                     @{
                         if (@item.users_id == @ViewBag.users_id)
                         {
-                            <form asp-action="DeleteListing" asp-controller="Auction" method="post">
-                                <input type="hidden" value=@item.listing_id/>
-                                <button class="btn btn-link" type="submit">Delete</button>
-                            </form>
+                            <a asp-action="DeleteListing" asp-controller="Auction" asp-route-item_id=@item.listing_id>DELETE</a>
                         }
                     }
                 </td>

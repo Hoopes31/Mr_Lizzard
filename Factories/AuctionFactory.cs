@@ -37,9 +37,13 @@ namespace DbConnection
         {
             using (IDbConnection dbConnection = Connection)
             {
-                string query = $"SELECT * FROM listings JOIN users ON listings.users_id WHERE listing_id = {item_id}";
+                string query = $"SELECT * FROM listings WHERE listing_id = {item_id}";
                 dbConnection.Open();
                 AuctionItem item = dbConnection.Query<AuctionItem>(query).SingleOrDefault();
+                query = $"SELECT * FROM users WHERE id = {item.users_id}";
+                User user = dbConnection.Query<User>(query).SingleOrDefault();
+                item.first_name = user.first_name;
+                item.users_id = user.id;
                 return item;
             }
         }
@@ -79,8 +83,10 @@ namespace DbConnection
         {
             using (IDbConnection dbConnection = Connection)
             {
-                string query = $"UPDATE winning_bids SET winning_bids.users_id = {user_id} WHERE winning_bids.listings_id = {listing_id}";
+                string query = $"DELETE FROM winning_bids WHERE winning_bids.users_id = {user_id}";
                 dbConnection.Open();
+                dbConnection.Execute(query);
+                query = $"INSERT INTO winning_bids (users_id, listings_id) values ({user_id}, {listing_id})";
                 dbConnection.Execute(query);
                 query = $"UPDATE listings SET starting_bid = {bid} WHERE listings.listing_id = {listing_id}";
                 dbConnection.Execute(query);

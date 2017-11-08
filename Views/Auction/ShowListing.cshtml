@@ -1,0 +1,14 @@
+@using scaffold.Models
+
+<h1>@ViewBag.bids.product_name</h1>
+<p>Created by @ViewBag.seller</p>
+<p>Time Remaining @ViewBag.timer days</p>
+<p>@ViewBag.bids.description</p>
+<h4>Current High Bid by @ViewBag.bids.first_name</h4>
+<h4>@ViewBag.bids.starting_bid.ToString("C")</h4>
+@{
+    BidView Form = new BidView();
+    Form.current_bid = @ViewBag.bids.starting_bid;
+    Form.listing_id = @ViewBag.listing_id;
+}
+@Html.Partial("PlaceBid", Form)

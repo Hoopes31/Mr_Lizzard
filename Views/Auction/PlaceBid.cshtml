@@ -1,0 +1,10 @@
+@model scaffold.Models.BidView
+
+<form asp-controller="Auction" asp-action="PlaceBid" method="post">
+    <input type="hidden" asp-for="current_bid" value=@Model.current_bid/>
+    <input type="hidden" asp-for="listing_id" value=@Model.listing_id />
+    <span asp-validation-for="amount"></span>
+    <input asp-for="amount" placeholder="amount" class="form-control"/>
+    <br>
+    <button type="submit">Place Bid</button>
+</form>

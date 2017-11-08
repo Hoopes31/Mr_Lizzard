@@ -1,0 +1,7 @@
+@model scaffold.Models.Delete
+
+<form asp-controller="Auction" asp-action="DeleteListing" method="post">
+    <input type="hidden" asp-for="listing_id" value=@Model.listing_id/>
+    <br>
+    <button type="button">Delete</button>
+</form>

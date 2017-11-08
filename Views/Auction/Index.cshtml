@@ -1,0 +1,45 @@
+@using scaffold.Models
+
+<h1>Current Auctions</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Seller</th>
+            <th scope="col">Top Bid</th>
+            <th scope="col">Time Remaining</th>
+            <th></th>
+            </tr>
+        </thead>
+        <tbody>
+@{
+        foreach (var item in @ViewBag.listings) 
+        {
+            @if (item.timer > 0)
+                {
+                <tr>
+                <th scope="row"><a asp-action="ShowListing" asp-controller="Auction" asp-route-seller=@item.first_name asp-route-time=@item.timer asp-route-item_id=@item.listing_id>@item.product_name</a></th>
+                <td>@item.first_name</td>
+                <td>@item.starting_bid.ToString("C")</td>
+                <td>@item.timer Days</td>
+                <td>
+                    @{
+                        if (@item.users_id == @ViewBag.users_id)
+                        {
+                            <form asp-action="DeleteListing" asp-controller="Auction" method="post">
+                                <input type="hidden" value=@item.listing_id/>
+                                <button class="btn btn-link" type="submit">Delete</button>
+                            </form>
+                        }
+                    }
+                </td>
+                </tr>
+            }
+        }
+}
+        </tbody>
+    </table>    
+
+<a asp-action="NewListing" asp-controller="Auction" class="btn btn-primary">New Auction</a>
+<h4>Your Current Wallet: @ViewBag.balance.ToString("C")</h4>

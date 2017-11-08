@@ -1,0 +1,11 @@
+<h1>All Users</h1>
+
+@{
+    foreach (var user in ViewBag.Users)
+    {
+        <a asp-action="ShowUser" asp-controller="Auction" asp-route-id="@user.id">@user.first_name @user.last_name</a> <a asp-action="Invite" asp-controller="Auction" asp-route-userId="@user.id">Connect</a>
+        <br>
+    }
+} 
+
+<h2>Users you may want to connection with</h2>

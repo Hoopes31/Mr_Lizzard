@@ -1,0 +1,18 @@
+@model scaffold.Models.AuctionView
+
+<form asp-controller="Auction" asp-action="AddListing" method="post">
+    <br>
+    <span asp-validation-for="product_name"></span>
+    <input asp-for="product_name" placeholder="Item name" class="form-control"/>
+    <br>
+    <span asp-validation-for="description"></span>
+    <input asp-for="description" placeholder="Brief description of the item..." class="form-control"/>
+    <br>
+    <span asp-validation-for="starting_bid"></span>
+    <input asp-for="starting_bid" placeholder="$0.00" class="form-control"/>
+    <br>
+    <span asp-validation-for="end_date"></span>
+    <input type="date" asp-for="end_date" class="form-control"/>
+    <br>
+    <button type="submit">Create Auction</button>
+</form>

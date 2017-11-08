@@ -120,7 +120,7 @@ namespace scaffold.Controllers
         }
         [HttpGet]
         [Route("delete_listing")]
-        public IActionResult DeleteListing(Delete model)
+        public IActionResult DeleteListing(int listing_id)
         {
             if (HttpContext.Session.GetInt32("id") == null)
             {
@@ -128,7 +128,7 @@ namespace scaffold.Controllers
             }
             if (ModelState.IsValid)
             {
-                auctionFactory.DeleteListing(model.listing_id);
+                auctionFactory.DeleteListing(listing_id);
             }
             return RedirectToAction("Index");
         }
